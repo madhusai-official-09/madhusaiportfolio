@@ -62,6 +62,30 @@ const projects = [
     githubURL:
       "https://github.com/madhusai-official-09/Vendor_Performance_Dashboard.git",
   },
+  {
+  title: "MadhuAI Framework",
+  description:
+    "A production-ready AI framework built with React, TypeScript, FastAPI, and Groq LLM, featuring real-time streaming chat, Retrieval-Augmented Generation (RAG), document uploads, conversation history, knowledge base management, and a modern responsive AI workspace designed for scalable intelligent applications.",
+  image: "/images/ma.png",
+  tags: [
+    "React",
+    "TypeScript",
+    "FastAPI",
+    "Python",
+    "Groq",
+    "RAG",
+    "ChromaDB",
+    "Sentence Transformers",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Vite",
+    "AI",
+    "LLM"
+  ],
+  liveURL:"https://madhu-ai-framework.vercel.app/",
+  githubURL:
+    "https://github.com/madhusai-official-09/Madhu-AI-Framework.git",
+},
 ];
 
 export default function ProjectSection() {
