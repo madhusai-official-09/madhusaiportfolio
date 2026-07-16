@@ -38,7 +38,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-text/90">
+          <h1 className="font-hero text-7xl md:text-9xl lg:text-6xl font-bold mb-4 text-text/90">
             Hi, I'm{" "}
             <span className="text-primary/70">
               Pitani MadhuSayi Krishna M P Rao

@@ -1,6 +1,35 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-body), sans-serif;
+  
+  --font-hero: var(--font-hero), serif;
+  --font-heading: var(--font-heading), sans-serif;
+  --font-subheading: var(--font-subheading), serif;
+  --font-body: var(--font-body), sans-serif;
+  --font-doto: var(--font-doto), monospace;
+  --font-data: var(--font-data), monospace;
+  --font-ui: var(--font-ui), sans-serif;
+  --font-accent-bold: var(--font-accent-bold), sans-serif;
+  --font-handwritten: var(--font-handwritten), cursive;
+  --font-kalam: var(--font-kalam), cursive;
+
+  /* Aliases for compatibility with legacy classes */
+  --font-display: var(--font-heading), sans-serif;
+  --font-mono-accent: var(--font-data), monospace;
+  --font-tag: var(--font-ui), sans-serif;
+  --font-smokum: var(--font-subheading), serif;
+
+  --color-accent: #C0C0C0; /* silver */
+  --color-accent-hover: #F5F5F5; /* near-white */
+  --color-accent-glow: rgba(192, 192, 192, 0.25);
+  
+  --color-bg-black: #000000;
+  --color-bg-near-black: #0a0a0a;
+  --color-bg-panel: #111111;
+}
+
+@theme {
   --color-primary:#20b2a6;
   --color-background:#0f1418;
   --color-card:#141a1f;
@@ -35,4 +64,13 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+:root{
+
+--font-display:var(--font-heading);
+--font-body:var(--font-body);
+--font-ui:var(--font-ui);
+--font-hero:var(--font-hero);
+
 }

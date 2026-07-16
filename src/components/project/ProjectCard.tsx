@@ -39,7 +39,7 @@ export default function ProjectCard({
           {title}
         </h3>
 
-        <p className="text-gray-400 text-sm leading-7 flex-1">{description}</p>
+        <p className="font-body text-zinc-400 text-sm leading-7 flex-1">{description}</p>
 
         <div className="flex flex-wrap gap-2 ">
           {tags.map((tag) => (

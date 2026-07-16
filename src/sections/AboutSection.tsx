@@ -74,14 +74,14 @@ export default function AboutSection() {
             I build scalable and user-focused web applications
           </motion.h2>
 
-          <p className="text-gray-400 max-w-xl ">
+          <p className="font-body text-zinc-400 max-w-xl ">
             Alongside web development, I have hands-on experience in Artificial
             Intelligence, Machine Learning, Data Analytics, and Computer Vision.
             I continuously explore new technologies and enjoy solving real-world
             problems through clean code, automation, and intuitive user
             experiences.
           </p>
-          <p className="text-gray-400 max-e-xl">
+          <p className="font-body text-zinc-400 max-e-xl">
             over time, I&apos;ve worked with tools like TypeScript,Mongodb, and
             modern UI systems to create projects that are both functional and
             production-ready.
@@ -99,7 +99,7 @@ export default function AboutSection() {
               className="p-4 rounded-xl bg-surface border border-border text-center"
             >
               <LuCode className="mx-auto mb-2 text-primary w-6 h-6" />
-              <p className="text-text text-sm">Fullstack Development</p>
+              <p className="font-body text-zinc-400 text-sm">Fullstack Development</p>
             </motion.div>
             <div className="p-4 rounded-xl bg-surface border border-border text-center">
               <LuDatabase className="mx-auto mb-2 text-primary w-6 h-6" />
