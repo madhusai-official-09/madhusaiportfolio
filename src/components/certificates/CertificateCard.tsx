@@ -1,9 +1,10 @@
 "use client";
-
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { LuArrowUpRight } from "react-icons/lu";
 import { Certificate } from "./certificates";
+import ElectricBorder from "@/components/ElectricBorder";
 
 interface Props {
   certificate: Certificate;
@@ -16,43 +17,55 @@ export default function CertificateCard({
   onClick,
   index,
 }: Props) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 70 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.12,
-      }}
-      whileHover={{
-        y: -10,
-        scale: 1.03,
-      }}
-      className="group cursor-pointer"
-      onClick={onClick}
+    <ElectricBorder
+      active={hovered}
+      color="#ef4444"
+      speed={1}
+      chaos={0.12}
+      borderRadius={20}
+      className="rounded-2xl p-3"
     >
-      <div
-        className="
-        overflow-hidden
+      <motion.div
+        initial={{ opacity: 0, y: 70 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.6,
+          delay: index * 0.12,
+        }}
+        whileHover={{
+          y: -8,
+          scale: 1.02,
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="group cursor-pointer"
+        onClick={onClick}
+      >
+        <div
+          className="
+        overflow-visible
         rounded-2xl
         border
         border-white/10
         bg-surface
         transition-all
         duration-300
-        group-hover:border-primary
-        group-hover:shadow-[0_20px_60px_rgba(0,255,180,0.25)]
+        group-hover:border-red-500
+        group-hover:shadow-[0_20px_60px_rgba(239,68,68,0.35)]
       "
-      >
-        {/* Certificate Image */}
+        >
+          {/* Certificate Image */}
 
-        <div className="relative aspect-[16/11] overflow-hidden">
-          <Image
-            src={certificate.image}
-            alt={certificate.title}
-            fill
-            className="
+          <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl">
+            <Image
+              src={certificate.image}
+              alt={certificate.title}
+              fill
+              className="
               object-contain
               bg-white p-3 
               rounded-xl
@@ -60,12 +73,12 @@ export default function CertificateCard({
               duration-500
               group-hover:scale-110
             "
-          />
+            />
 
-          {/* Overlay */}
+            {/* Overlay */}
 
-          <div
-            className="
+            <div
+              className="
             absolute
             inset-0
             bg-black/0
@@ -76,11 +89,11 @@ export default function CertificateCard({
             items-center
             justify-center
           "
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileHover={{ opacity: 1, scale: 1 }}
-              className="
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileHover={{ opacity: 1, scale: 1 }}
+                className="
                 opacity-0
                 group-hover:opacity-100
                 px-5
@@ -93,29 +106,24 @@ export default function CertificateCard({
                 gap-2
                 font-medium
               "
-            >
-              View Certificate
-              <LuArrowUpRight />
-            </motion.div>
+              >
+                View Certificate
+                <LuArrowUpRight />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Content */}
+
+          <div className="p-4 space-y-1.5">
+            <h3 className="text-xl font-bold text-text">{certificate.title}</h3>
+
+            <p className="text-primary font-medium">{certificate.issuer}</p>
+
+            <p className="text-sm text-zinc-400">{certificate.date}</p>
           </div>
         </div>
-
-        {/* Content */}
-
-        <div className="p-5 space-y-2">
-          <h3 className="text-xl font-bold text-text">
-            {certificate.title}
-          </h3>
-
-          <p className="text-primary font-medium">
-            {certificate.issuer}
-          </p>
-
-          <p className="text-sm text-zinc-400">
-            {certificate.date}
-          </p>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </ElectricBorder>
   );
 }

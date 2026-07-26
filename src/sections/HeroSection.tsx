@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { LuArrowRight, LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 import { Doto, Gloria_Hallelujah } from "next/font/google";
-import TiltedCard from "@/components/TiltedCard";
+import Lanyard from "@/components/Lanyard";
 
 const doto = Doto({
   subsets: ["latin"],
@@ -168,7 +168,7 @@ export default function HeroSection() {
         </motion.div>
         {/*rightside */}
         <motion.div
-          className="flex justify-center items-center mt-12 lg:mt-0"
+          className="flex justify-center items-center w-full mt-10 lg:mt-0 min-h-["
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -197,19 +197,11 @@ export default function HeroSection() {
               }}
             />
 
-            <TiltedCard
-              imageSrc="/images/profilepics.jpg"
-              altText="MadhuSai"
-              captionText="MadhuSai"
-              containerHeight="380px"
-              containerWidth="380px"
-              imageHeight="380px"
-              imageWidth="380px"
-              rotateAmplitude={12}
-              scaleOnHover={1.05}
-              showMobileWarning={false}
-              showTooltip={true}
-              displayOverlayContent={false}
+            <Lanyard
+              position={[0, 0, 22]}
+              gravity={[0, -30, 0]}
+              frontImage="/images/id-front.png"
+              backImage="/images/id-back.png"
             />
           </motion.div>
         </motion.div>
