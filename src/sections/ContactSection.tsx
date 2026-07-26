@@ -3,27 +3,24 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LuMail, LuMapPin, LuPhone, LuSend } from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuMail, LuSend } from "react-icons/lu";
 import { motion } from "framer-motion";
 
 const contactInfo = [
   {
     icon: LuMail,
     label: "Email",
-    value: "madhusayi555@gmail.com",
     href: "mailto:madhusayi555@gmail.com",
   },
   {
-    icon: LuPhone,
-    label: "Phone",
-    value: "+91 8247842565",
-    href: "tel:+918247842565",
+    icon: LuLinkedin,
+    label: "Linkedin",
+    href: "https://www.linkedin.com/in/pitanimadhusayi",
   },
   {
-    icon: LuMapPin,
-    label: "Location",
-    value: "India",
-    href: "#",
+    icon: LuGithub,
+    label: "Github",
+    href: "https://github.com/madhusai-official-09/"
   },
 ];
 
@@ -182,12 +179,11 @@ export default function ContactSection() {
                   </motion.div>
                   <div>
                     <div className="text-gray-400 text-sm">{item.label}</div>
-                    <div className="font-medium">{item.value}</div>
                   </div>
                 </motion.a>
               ))}
             </div>
-            {/* Available Crad */}
+            {/* Available Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

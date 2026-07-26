@@ -1,5 +1,5 @@
 import AnimationLayout from "@/components/layouts/AnimationLayout";
-import AboutSection from "@/sections/AboutSection";
+import CertificatesSection from "@/sections/CertificatesSection";
 import ContactSection from "@/sections/ContactSection";
 import EducationSection from "@/sections/EducationSection";
 import Footer from "@/sections/Footer";
@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <AnimationLayout>
       <HeroSection />
-      <AboutSection />
-      <ProjectSection />
       <EducationSection />
       <SkillsSection />
+      <CertificatesSection />
+      <ProjectSection />
       <ContactSection />
       <Footer />
       <Toaster />

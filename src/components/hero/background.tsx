@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { InertiaPlugin } from 'gsap/InertiaPlugin';
 
+
 import '../../app/globals.css';
 
 gsap.registerPlugin(InertiaPlugin);
@@ -55,9 +56,9 @@ function hexToRgb(hex: string) {
 const DotGrid: React.FC<DotGridProps> = ({
   dotSize = 16,
   gap = 32,
-  baseColor = '#5227FF',
-  activeColor = '#5227FF',
-  proximity = 150,
+  baseColor = '#2d2d2d',
+  activeColor = '#dc2626',
+  proximity = 120,
   speedTrigger = 100,
   shockRadius = 250,
   shockStrength = 5,
