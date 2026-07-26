@@ -35,10 +35,7 @@ export default function CertificatesSection() {
         <SectionHeader title="My"
         highlight="Certificates"
         badge="Certifications"
-        description="Industry certifications, cloud training, virtual internships
-            and professional programs that strengthened my skills in
-            Full Stack Development, Artificial Intelligence and Cloud
-            Computing."/>
+        description="Certifications and virtual experiences in Full Stack Development, AI, Cloud, and modern technologies."/>
 
 
         {/* Grid */}
