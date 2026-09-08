@@ -4,6 +4,7 @@ import {
   Geist, Black_Ops_One, JetBrains_Mono, Trocchi,Kalam,Gloria_Hallelujah,Notable,Doto,Pixelify_Sans,Abril_Fatface,} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
+import PortfolioMadhuAI from "@/components/MadhuAIWidget";
 
 const hero = Abril_Fatface({
   weight: "400",
@@ -81,6 +82,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <PortfolioMadhuAI />
       </body>
     </html>
   );
