@@ -11,7 +11,7 @@ const MadhuAIWidget = dynamic(
 export default function PortfolioMadhuAI() {
   return (
     <MadhuAIWidget
-      projectId="madhu_50c74c4828114b289c0623acb9092ec0"
+      projectId="madhu_f6552a818cb84b5994615101a44a21c2"
       backendUrl="https://madhu-ai-backend.onrender.com"
     />
   );
