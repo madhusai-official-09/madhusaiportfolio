@@ -110,7 +110,7 @@ export default function Navbar() {
               icon={LuDownload}
               rounded
               text="Resume"
-              href="/public/Resume Madhusayi DA.pdf"
+              href="/public/Madhusayi_Pitani_ResumeA.pdf"
               download
             />
           </div>
