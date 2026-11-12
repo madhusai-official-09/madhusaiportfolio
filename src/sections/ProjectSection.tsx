@@ -100,7 +100,7 @@ export default function ProjectSection() {
           duration: 5,
           repeat: Infinity,
         }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-3xl bg-primary/10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-3xl bg-red-500/10"
       />
       <div className="w-[90%] max-w-6xl mx-auto space-y-12">
         <motion.div

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
+import OrbitImages from "@/components/OrbitImages";
 
 type Skill = {
   name: string;
@@ -110,22 +111,71 @@ const skills: Skill[] = [
 
 export default function SkillsSection() {
   const [activeSkill, setActiveSkill] = useState<Skill>(skills[0]);
+  const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop");
 
-  const particles = [
-  { id: 0, left: "12%", top: "18%", delay: 0.1, duration: 4 },
-  { id: 1, left: "26%", top: "65%", delay: 0.8, duration: 5 },
-  { id: 2, left: "38%", top: "12%", delay: 1.4, duration: 4.5 },
-  { id: 3, left: "52%", top: "82%", delay: 0.6, duration: 5.2 },
-  { id: 4, left: "68%", top: "20%", delay: 1.2, duration: 4.8 },
-  { id: 5, left: "84%", top: "56%", delay: 0.3, duration: 5 },
-  { id: 6, left: "92%", top: "32%", delay: 1.6, duration: 4.6 },
-  { id: 7, left: "18%", top: "86%", delay: 0.9, duration: 5.4 },
-];
+  useEffect(() => {
+    const updateScreenSize = () => {
+      if (window.innerWidth < 640) setScreenSize("mobile");
+      else if (window.innerWidth < 1024) setScreenSize("tablet");
+      else setScreenSize("desktop");
+    };
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+
+  const orbitSettings = {
+    mobile: { radiusX: 430, radiusY: 210, itemSize: 92, height: "clamp(330px, 105vw, 430px)", centerWidth: "w-[190px]" },
+    tablet: { radiusX: 460, radiusY: 235, itemSize: 100, height: "clamp(400px, 58vw, 560px)", centerWidth: "w-[230px]" },
+    desktop: { radiusX: 460, radiusY: 250, itemSize: 108, height: "clamp(460px, 54vw, 680px)", centerWidth: "w-[300px]" },
+  }[screenSize];
+
+  const orbitCenter = (
+    <motion.div
+      key={activeSkill.name}
+      initial={{ opacity: 0, scale: 0.94 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className={`relative ${orbitSettings.centerWidth} max-w-[78vw] rounded-2xl border border-primary/30 bg-black/90 p-2.5 text-center shadow-[0_0_45px_rgba(255,0,0,0.18)] backdrop-blur-2xl sm:rounded-3xl sm:p-3 lg:p-5`}
+    >
+      <div className="pointer-events-none absolute inset-0 rounded-3xl bg-primary/5" />
+      <div className="relative z-10">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-background shadow-[0_0_25px_rgba(255,0,0,0.12)] sm:h-14 sm:w-14 lg:h-20 lg:w-20">
+          <Image
+            src={activeSkill.icon}
+            alt={activeSkill.name}
+            width={40}
+            height={40}
+            unoptimized
+          />
+        </div>
+        <h2 className="mt-2 text-lg font-bold text-text sm:mt-3 sm:text-xl lg:mt-4 lg:text-2xl">{activeSkill.name}</h2>
+        <p className="mt-1 font-medium text-primary">{activeSkill.category}</p>
+        <p className="mt-2 text-xs leading-5 text-gray-400 sm:mt-3 sm:text-sm sm:leading-6">{activeSkill.desc}</p>
+        <div className="mt-3 border-t border-border pt-3 sm:mt-4 sm:pt-4 lg:mt-5">
+          <h4 className="mb-2 text-xs font-semibold text-primary sm:mb-3 sm:text-sm">
+            Related Technologies
+          </h4>
+          <div className="flex flex-wrap justify-center gap-2">
+            {activeSkill.tech.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-primary/20 bg-primary/10 px-2 py-1 text-[10px] text-primary sm:px-3 sm:text-xs"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <p className="mt-3 text-[10px] text-gray-500 sm:mt-4 sm:text-xs">Click an orbiting skill to explore</p>
+      </div>
+    </motion.div>
+  );
 
   return (
-    <section id="skills" className="py-24 relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-3xl bg-primary/10" />
-      <div className="w-[90%] max-w-6xl mx-auto space-y-12">
+    <section id="skills" className="relative py-24">
+      <div className="absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <div className="mx-auto w-[90%] max-w-6xl space-y-12">
         <SectionHeader
           title="My"
           highlight="Skills"
@@ -134,172 +184,35 @@ export default function SkillsSection() {
         />
 
         <div className="relative mt-12 lg:mt-16">
-          <div className="relative mx-auto hidden h-[760px] w-full max-w-6xl lg:block">
-            <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10" />
-            <div className="absolute left-1/2 top-1/2 h-560px w-560px -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10" />
-
-            <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45 }}
-              className="absolute left-1/2 top-1/2 z-30 w-330px -translate-x-1/2 -translate-y-1/2 rounded-4xl border border-primary/30 bg-surface/80 p-8 shadow-[0_0_50px_rgba(32,178,166,0.18)] backdrop-blur-xl lg:w-380px"
-            >
-              <div className="absolute inset-0 rounded-4xl bg-primary/5 blur-3xl" />
-              <div className="relative z-10 text-center">
-                <motion.div
-                  whileHover={{ rotate: 10, scale: 1.08 }}
-                  className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-primary/30 bg-background"
-                >
-                  <Image
-                    src={activeSkill.icon}
-                    alt={activeSkill.name}
-                    width={58}
-                    height={58}
-                    unoptimized
-                  />
-                </motion.div>
-
-                <h2 className="mt-6 text-3xl font-bold text-text">
-                  {activeSkill.name}
-                </h2>
-                <p className="mt-2 font-medium text-primary">
-                  {activeSkill.category}
-                </p>
-                <p className="mt-5 leading-7 text-gray-400">
-                  {activeSkill.desc}
-                </p>
-
-                <div className="mt-8 border-t border-border pt-6">
-                  <h4 className="mb-4 font-semibold text-primary">
-                    Related Technologies
-                  </h4>
-                  <div className="flex flex-wrap justify-center gap-2.5">
-                    {activeSkill.tech.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-sm text-primary"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <p className="mt-8 text-sm text-gray-500">
-                  Click any skill orb to explore more
-                </p>
-              </div>
-            </motion.div>
-
-            {skills.map((skill, index) => (
-              <motion.button
-                key={skill.name}
-                type="button"
-                aria-pressed={activeSkill.name === skill.name}
-                onClick={() => setActiveSkill(skill)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, y: [0, -10, 0] }}
-                transition={{
-                  opacity: { delay: index * 0.06 },
-                  y: {
-                    repeat: Infinity,
-                    duration: 5 + index * 0.3,
-                    ease: "easeInOut",
-                  },
-                }}
-                whileHover={{ scale: 1.12, rotate: 4, y: -12 }}
-                whileTap={{ scale: 0.96 }}
-                style={{ left: skill.x, top: skill.y }}
-                className={`absolute flex h-24 w-24 flex-col items-center justify-center rounded-2xl border bg-surface/90 backdrop-blur-lg transition-all duration-300 xl:h-28 xl:w-28 ${
-                  activeSkill.name === skill.name
-                    ? "border-primary bg-primary/10 shadow-[0_0_40px_rgba(32,178,166,0.35)]"
-                    : "border-border bg-surface/70 hover:border-primary"
-                }`}
-              >
-                <Image
-                  src={skill.icon}
-                  alt={skill.name}
-                  width={40}
-                  height={40}
-                  unoptimized
-                />
-                <span className="mt-2 text-sm font-semibold">{skill.name}</span>
-              </motion.button>
-            ))}
-
-            {particles.map((particle) => (
-              <motion.span
-                key={particle.id}
-                className="absolute h-1.5 w-1.5 rounded-full bg-primary/50"
-                style={{ left: particle.left, top: particle.top }}
-                animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.7, 1] }}
-                transition={{
-                  duration: particle.duration,
-                  delay: particle.delay,
-                  repeat: Infinity,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="mt-10 lg:hidden">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="rounded-3xl border border-primary/25 bg-surface/80 p-6 shadow-[0_0_35px_rgba(32,178,166,0.12)] backdrop-blur-xl"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/30 bg-background">
-                  <Image
-                    src={activeSkill.icon}
-                    alt={activeSkill.name}
-                    width={38}
-                    height={38}
-                    unoptimized
-                  />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-text">
-                    {activeSkill.name}
-                  </h3>
-                  <p className="text-sm text-primary">{activeSkill.category}</p>
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-7 text-gray-400">
-                {activeSkill.desc}
-              </p>
-            </motion.div>
-
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              {skills.map((skill) => (
-                <motion.button
-                  key={skill.name}
-                  type="button"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => setActiveSkill(skill)}
-                  className={`rounded-2xl border p-4 text-center transition ${
-                    activeSkill.name === skill.name
-                      ? "border-primary bg-primary/10"
-                      : "border-border bg-surface"
-                  }`}
-                >
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-background">
-                    <Image
-                      src={skill.icon}
-                      alt={skill.name}
-                      width={28}
-                      height={28}
-                      unoptimized
-                    />
-                  </div>
-                  <span className="mt-3 block text-sm font-medium">
-                    {skill.name}
-                  </span>
-                </motion.button>
-              ))}
-            </div>
+          <div className="w-full overflow-hidden">
+            <OrbitImages
+              images={skills.map((skill) => ({ src: skill.icon, alt: skill.name }))}
+              shape="ellipse"
+              baseWidth={1400}
+              radiusX={orbitSettings.radiusX}
+              radiusY={orbitSettings.radiusY}
+              width="100%"
+              height={orbitSettings.height}
+              itemSize={orbitSettings.itemSize}
+              duration={42}
+              direction="normal"
+              fill
+              depth={0.72}
+              itemRadius="18px"
+              shadow={0.65}
+              hoverScale={1.18}
+              hoverSpeed={0.22}
+              draggable
+              clickToFront
+              intro
+              showPath
+              pathColor="rgba(255, 35, 35, 0.28)"
+              pathWidth={1.5}
+              pathDash={5}
+              onItemClick={(index) => setActiveSkill(skills[index])}
+              centerContent={orbitCenter}
+              className="mx-auto max-w-6xl"
+            />
           </div>
         </div>
       </div>

@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { LuArrowRight, LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 import { Doto, Gloria_Hallelujah } from "next/font/google";
-import Lanyard from "@/components/Lanyard";
+import HoloCard from "@/components/HoloCard";
+
 
 const doto = Doto({
   subsets: ["latin"],
@@ -196,13 +197,31 @@ export default function HeroSection() {
                 repeat: Infinity,
               }}
             />
+<div className="bat-card-hover">
+<HoloCard
+  image="/images/id-front.png"
+  alt="Pitani MadhuSai - Batman Edition"
+  preset="shards"
+  intensity={0}
+  edgeSparkle={0}
+  glare={0}
+  frame={0}
+  foilColor="#ef4444"
+  width={320}
+  radius={14}
+  tiltMax={8}
+  hoverScale={1.03}
+  idle={false}
+  shadow={true}
+  className="holo-card-clean"
+/>
+  <span className="bat bat-1">🦇</span>
+  <span className="bat bat-2">🦇</span>
+  <span className="bat bat-3">🦇</span>
+  <span className="bat bat-4">🦇</span>
+</div>
 
-            <Lanyard
-              position={[0, 0, 22]}
-              gravity={[0, -30, 0]}
-              frontImage="/images/id-front.png"
-              backImage="/images/id-back.png"
-            />
+
           </motion.div>
         </motion.div>
       </div>
